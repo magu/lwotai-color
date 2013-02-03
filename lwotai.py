@@ -156,7 +156,7 @@ class Country:
 		if len(self.markers) != 0:
 			markersStr = "\n   Markers: %s" % ", ".join(self.markers)
 		if self.type == "Shia-Mix" or self.type == "Suni":
-			return "%s, %s %s, %d Resource(s)\n   Troops:%d Active:%d Sleeper:%d Cadre:%d Aid:%d Besieged:%d Reg Ch:%d Plots:%d %s" % (color.blue + self.name + color.endc, self.govStr(),(color.red if self.alignment == "Adversary" else color.yellow if self.alignment == "Ally" else color.green) + self.alignment + color.endc,self.app.countryResources(self.name),self.troops(),self.activeCells,self.sleeperCells, self.cadre, self.aid, self.besieged, self.regimeChange, self.plots, markersStr)
+			return "%s, %s %s, %d Resource(s)\n   Troops:%d Active:%d Sleeper:%d Cadre:%d Aid:%d Besieged:%d Reg Ch:%d Plots:%d %s" % (color.blue + self.name + color.endc, self.govStr(),(color.red if self.alignment == "Adversary" else color.green if self.alignment == "Ally" else color.yellow) + self.alignment + color.endc,self.app.countryResources(self.name),self.troops(),self.activeCells,self.sleeperCells, self.cadre, self.aid, self.besieged, self.regimeChange, self.plots, markersStr)
 
 		elif self.name == "Philippines":
 			return "%s - Posture:%s\n   Troops:%d Active:%d Sleeper:%d Cadre:%d Plots:%d %s" % (color.blue + self.name + color.endc,(color.lightcyan if self.posture == "Hard" else color.lightpurple) + self.posture + color.endc, self.troops(), self.activeCells,self.sleeperCells, self.cadre, self.plots, markersStr)
@@ -1522,7 +1522,7 @@ class Card:
 						app.map[target].alignment = "Neutral"
 					elif app.map[target].alignment == "Neutral":	
 						app.map[target].alignment = "Adversary"
-					app.outputToHistory((color.red + "%s" + color.purple + " Alignment shifted to %s" + color.purple + "." + color.endc) % (target, (color.red if app.map[target].alignment == "Adversary" else app.map[target].alignment if self.alignment == "Ally" else color.green) + app.map[target].alignment), True)
+					app.outputToHistory((color.red + "%s" + color.purple + " Alignment shifted to %s" + color.purple + "." + color.endc) % (target, (color.red if app.map[target].alignment == "Adversary" else color.green if app.map[target].alignment == "Ally" else color.yellow) + app.map[target].alignment), True)
 			elif self.number == 78: # Axis of Evil
 				app.outputToHistory("US discards any Iran, Hizballah, or Jaysh al-Mahdi cards from hand.", False)
 				if app.map["United States"].posture == "Soft":
@@ -1577,7 +1577,7 @@ class Card:
 					app.map["Pakistan"].alignment = "Neutral"
 				elif app.map["Pakistan"].alignment == "Neutral":	
 					app.map["Pakistan"].alignment = "Adversary"
-				app.outputToHistory((color.red + "%s" + color.purple + " Alignment shifted to %s" + color.purple + "." + color.endc) % ("Pakistan", (color.red if app.map["Pakistan"].alignment == "Adversary" else app.map["Pakistan"].alignment if self.alignment == "Ally" else color.green) + app.map["Pakistan"].alignment), True)
+				app.outputToHistory((color.red + "%s" + color.purple + " Alignment shifted to %s" + color.purple + "." + color.endc) % ("Pakistan", (color.red if app.map["Pakistan"].alignment == "Adversary" else color.green if app.map["Pakistan"].alignment == "Ally" else color.yellow) + app.map["Pakistan"].alignment), True)
 				app.outputToHistory(app.map["Pakistan"].countryStr(), True)
 			elif self.number == 84 or self.number == 85: # Leak
 				possibles = []
